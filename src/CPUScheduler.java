@@ -57,6 +57,7 @@ public class CPUScheduler {
             if (sortedProcesses.get(i).ProcessWaitingTime >= AgingInterval && !sortedProcesses.get(i).ProcessIsDone) {
                 sortedProcesses.get(i).ProcessPriority++;
             }
+            sortedProcesses.sort(Comparator.comparingInt(Process::getProcessArrivalTime).thenComparingInt(Process::getProcessPriority));
             totalWaitingTime += waitingTime;
             sortedProcesses.get(i).ProcessTurnAroundTime = sortedProcesses.get(i).ProcessEndTime - sortedProcesses.get(i).ProcessArrivalTime;
             totalTurnAroundTime += sortedProcesses.get(i).ProcessTurnAroundTime;
