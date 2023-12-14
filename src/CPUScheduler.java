@@ -44,18 +44,23 @@ public class CPUScheduler {
 
 
     public void priorityScheduling(List<Process> processes) {
-        double totalWaitingTime = 0, totalTurnAroundTime = 0;
+        double totalWaitingTime = 0, totalTurnAroundTime = 0, AgingInterval = 5;
         List<Process> sortedProcesses = new ArrayList<>(processes);
         sortedProcesses.sort(Comparator.comparingInt(Process::getProcessArrivalTime).thenComparingInt(Process::getProcessPriority));
 
         for (int i = 0; i < sortedProcesses.size(); i++) {
-                sortedProcesses.get(i).ProcessStartTime = i == 0 ? 0 : sortedProcesses.get(i - 1).ProcessEndTime;
-                sortedProcesses.get(i).ProcessEndTime = sortedProcesses.get(i).ProcessStartTime + sortedProcesses.get(i).ProcessBurstTime;
+            sortedProcesses.get(i).ProcessStartTime = i == 0 ? 0 : sortedProcesses.get(i - 1).ProcessEndTime;
+            sortedProcesses.get(i).ProcessEndTime = sortedProcesses.get(i).ProcessStartTime + sortedProcesses.get(i).ProcessBurstTime;
+            processes.get(i).ProcessIsDone = true;
             int waitingTime = Math.max(0, sortedProcesses.get(i).ProcessStartTime - sortedProcesses.get(i).ProcessArrivalTime);
             sortedProcesses.get(i).ProcessWaitingTime = waitingTime;
+            if (sortedProcesses.get(i).ProcessWaitingTime >= AgingInterval && !sortedProcesses.get(i).ProcessIsDone) {
+                sortedProcesses.get(i).ProcessPriority++;
+            }
             totalWaitingTime += waitingTime;
             processes.get(i).ProcessTurnAroundTime = sortedProcesses.get(i).ProcessEndTime - sortedProcesses.get(i).ProcessArrivalTime;
             totalTurnAroundTime += sortedProcesses.get(i).ProcessTurnAroundTime;
+
         }
 
         for (Process sortedProcess : sortedProcesses) {
@@ -66,6 +71,9 @@ public class CPUScheduler {
         System.out.println("Average Waiting Time: " + totalWaitingTime / sortedProcesses.size());
         System.out.println("Average Turn Around Time: " + totalTurnAroundTime / sortedProcesses.size());
     }
+
+
+
 }
 
 

@@ -20,6 +20,8 @@ public class Process {
 
     public int ProcessTurnAroundTime;
 
+    public boolean ProcessIsDone = false;
+
 
     Process (String ProcessName, String ProcessColor, int ProcessArrivalTime, int ProcessBurstTime, int ProcessPriority) {
         this.ProcessName = ProcessName;
