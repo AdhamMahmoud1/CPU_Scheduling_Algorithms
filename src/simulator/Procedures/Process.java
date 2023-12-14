@@ -1,4 +1,4 @@
-package simulator.Procedures;
+package Procedures;
 
 public class Process {
     final private String name;
@@ -6,8 +6,11 @@ public class Process {
 
     private int startTime;
     final private int burstTime;
-    final  private int priority;
+    // I removed the final keyword from burstTime because I need to change it in the Priority class
+    private int priority;
     final private String color;
+
+    private boolean ProcessIsDone ;
 
 
     public Process(){
@@ -48,6 +51,26 @@ public class Process {
     public String getColor() {
         return color;
     }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void increasePriority(){
+        this.priority++;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+   public void setProcessIsDone(boolean ProcessIsDone) {
+            this.ProcessIsDone = ProcessIsDone;
+        }
+
+        public boolean getProcessIsDone() {
+            return ProcessIsDone;
+        }
 
 
 }

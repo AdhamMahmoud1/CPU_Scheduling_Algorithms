@@ -1,16 +1,18 @@
-package simulator.Procedures;
+package Procedures;
 
 public class ProcessDuration extends Process{
     private double waitingTime;
     private double turnAroundTime;
     private double responseTime;
     private int startTime;
+
     private int endTime;
 
 
     public ProcessDuration(String name, int arrivalTime, int burstTime, int priority, String color) {
         super(name, arrivalTime, burstTime, priority, color);
         this.waitingTime = 0;
+
         this.turnAroundTime = 0;
         this.responseTime = 0;
         this.startTime = 0;
@@ -57,4 +59,17 @@ public class ProcessDuration extends Process{
     public double getResponseTime() {
         return responseTime;
     }
+
+    public void setWaitingTime(double waitingTime) {
+        this.waitingTime = waitingTime;
+    }
+
+    public void setTurnAroundTime(double turnAroundTime) {
+        this.turnAroundTime = turnAroundTime;
+    }
+
+
+
+
+
 }
