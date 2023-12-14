@@ -58,7 +58,7 @@ public class CPUScheduler {
                 sortedProcesses.get(i).ProcessPriority++;
             }
             totalWaitingTime += waitingTime;
-            processes.get(i).ProcessTurnAroundTime = sortedProcesses.get(i).ProcessEndTime - sortedProcesses.get(i).ProcessArrivalTime;
+            sortedProcesses.get(i).ProcessTurnAroundTime = sortedProcesses.get(i).ProcessEndTime - sortedProcesses.get(i).ProcessArrivalTime;
             totalTurnAroundTime += sortedProcesses.get(i).ProcessTurnAroundTime;
 
         }
